@@ -8,7 +8,7 @@
 import Foundation
 
 protocol StormImageManagerDelegate {
-    func didPopulateStormImages(_ stormImageManager: StormImageManager, with images: Data)
+    func didPopulateStormImages(_ stormImageManager: StormImageManager, with images: [String])
 }
 
 struct StormImageManager {
@@ -17,7 +17,10 @@ struct StormImageManager {
     func populateStormImages() {
         let fileManager: FileManager = FileManager()
         let path: String = Bundle.main.resourcePath!
-        let data: Data = fileManager.contents(atPath: path)!
+        let resourceList: [String] = try! fileManager.contentsOfDirectory(atPath: path)
+        let data: [String] = resourceList.filter { (string: String) in
+            return string.hasPrefix("nssl")
+        }
         self.delegate?.didPopulateStormImages(self, with: data)
     }
 }

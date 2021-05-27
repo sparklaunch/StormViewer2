@@ -9,4 +9,5 @@ struct K {
     static let nsslPrefix: String = "nssl"
     static let cellIdentifier: String = "StormCell"
     static let title: String = "Storm Viewer 2"
+    static let detailViewIdentifier: String = "DetailViewController"
 }

@@ -48,6 +48,15 @@ extension MainViewController: UITableViewDataSource {
 // MARK: - UITableViewDelegate
 
 extension MainViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let row: Int = indexPath.row
+        let selectedImage: String = self.stormImages[row]
+        let image: UIImage = UIImage(named: selectedImage)!
+        let detailViewController: DetailViewController = self.storyboard?.instantiateViewController(identifier: K.detailViewIdentifier) as! DetailViewController
+        detailViewController.image = image
+        // If you would try to reach the imageView.image right here, you might have an error. Because the imageView hasn't yet been initialized.
+        self.navigationController?.pushViewController(detailViewController, animated: true)
+    }
 }
 
 // MARK: - StormImageManagerDelegate

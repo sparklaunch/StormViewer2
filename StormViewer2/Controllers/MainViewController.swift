@@ -21,11 +21,11 @@ class MainViewController: UIViewController {
 
 extension MainViewController {
     func initialize() {
-        self.title = "Storm Viewer 2"
+        self.title = K.title
         self.tableView.dataSource = self
         self.tableView.delegate = self
         self.stormImageManager.delegate = self
-        self.tableView.register(UINib(nibName: "StormCell", bundle: nil), forCellReuseIdentifier: "StormCell")
+        self.tableView.register(UINib(nibName: K.cellIdentifier, bundle: nil), forCellReuseIdentifier: K.cellIdentifier)
         self.stormImageManager.populateStormImages()
         self.navigationController?.navigationBar.prefersLargeTitles = true
     }
@@ -38,7 +38,7 @@ extension MainViewController: UITableViewDataSource {
         return self.stormImages.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let stormCell: StormCell = self.tableView.dequeueReusableCell(withIdentifier: "StormCell", for: indexPath) as! StormCell
+        let stormCell: StormCell = self.tableView.dequeueReusableCell(withIdentifier: K.cellIdentifier, for: indexPath) as! StormCell
         let label: String = self.stormImages[indexPath.row]
         stormCell.stormCellLabel.text = label
         return stormCell

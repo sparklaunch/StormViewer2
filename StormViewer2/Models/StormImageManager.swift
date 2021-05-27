@@ -13,13 +13,12 @@ protocol StormImageManagerDelegate {
 
 struct StormImageManager {
     var delegate: StormImageManagerDelegate?
-    var stormImages: [StormImage] = [StormImage]()
     func populateStormImages() {
         let fileManager: FileManager = FileManager()
         let path: String = Bundle.main.resourcePath!
         let resourceList: [String] = try! fileManager.contentsOfDirectory(atPath: path)
         let data: [String] = resourceList.filter { (string: String) in
-            return string.hasPrefix("nssl")
+            return string.hasPrefix(K.nsslPrefix)
         }
         self.delegate?.didPopulateStormImages(self, with: data)
     }

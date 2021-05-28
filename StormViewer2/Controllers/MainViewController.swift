@@ -55,6 +55,8 @@ extension MainViewController: UITableViewDelegate {
         let detailViewController: DetailViewController = self.storyboard?.instantiateViewController(identifier: K.detailViewIdentifier) as! DetailViewController
         detailViewController.image = image
         // If you would try to reach the imageView.image right here, you might have an error. Because the imageView hasn't yet been initialized.
+        detailViewController.index = row + 1
+        detailViewController.totalCount = self.stormImages.count
         self.navigationController?.pushViewController(detailViewController, animated: true)
     }
 }

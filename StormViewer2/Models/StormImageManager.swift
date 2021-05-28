@@ -20,6 +20,18 @@ struct StormImageManager {
         let data: [String] = resourceList.filter { (string: String) in
             return string.hasPrefix(K.nsslPrefix)
         }
-        self.delegate?.didPopulateStormImages(self, with: data)
+        let sortedData: [String] = self.sortStormImages(with: data)
+        self.delegate?.didPopulateStormImages(self, with: sortedData)
+    }
+    func sortStormImages(with images: [String]) -> [String] {
+        let sortedImages: [String] = images.sorted { firstString, secondString in
+            let firstIndex: String.Index = firstString.index(firstString.startIndex, offsetBy: 6)
+            let secondIndex: String.Index = secondString.index(secondString.endIndex, offsetBy: -5)
+            let range: ClosedRange<String.Index> = firstIndex...secondIndex
+            let firstNumber: String = String(firstString[range])
+            let secondNumber: String = String(secondString[range])
+            return Int(firstNumber)! < Int(secondNumber)!
+        }
+        return sortedImages
     }
 }
